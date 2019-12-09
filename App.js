@@ -13,6 +13,10 @@ export default class App extends Component {
     setTimeout(() => {
       this._list && this._list.scrollToEnd({animated: false});
     }, 3000);
+
+    // setTimeout(() => {
+    //   this._list && this._list.scrollTo({x: 0, y: 0});
+    // }, 5000);
   }
 
   renderItem = ({item}) => {

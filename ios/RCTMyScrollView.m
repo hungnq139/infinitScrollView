@@ -189,6 +189,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
   return ((RCTMyScrollView *)self.superview).contentView;
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+  [super touchesBegan:touches withEvent:event];
+  //your code
+  NSLog(@"Dcm : %f - %f" , [super contentOffset].x , [super contentOffset].y);
+}
+
 /**
  * @return Whether or not the scroll view interaction should be blocked because
  * JS was found to be the responder.
@@ -633,7 +639,6 @@ static inline void RCTApplyTransformationAccordingLayoutDirection(UIView *view, 
  */
 - (void)scrollToEnd:(BOOL)animated
 {
-  // NSLog(@"dech");
   BOOL isHorizontal = [self isHorizontal:_scrollView];
   CGPoint offset;
   CGFloat offsetX,offsetY;
@@ -651,10 +656,14 @@ static inline void RCTApplyTransformationAccordingLayoutDirection(UIView *view, 
   if (!CGPointEqualToPoint(_scrollView.contentOffset, offset)) {
     // Ensure at least one scroll event will fire
     _allowNextScrollNoMatterWhat = YES;
-    [UIView animateWithDuration:10.0 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-      [_scrollView setContentOffset:offset animated:false];
-    } completion:^(BOOL finished) {}];
+    [UIView animateWithDuration:10.0 delay:0 options: (UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction) animations:^{
+      [_scrollView setContentOffset:offset];
+    } completion:^(BOOL input){}];
   }
+}
+
+- (void)stopAni{
+  [[_scrollView layer] removeAllAnimations];
 }
 
 - (void)zoomToRect:(CGRect)rect animated:(BOOL)animated
