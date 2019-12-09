@@ -10,6 +10,8 @@
 		00E356F31AD99517003FC87E /* testScrollViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* testScrollViewTests.m */; };
 		0EF739DC239E016E00EA468A /* RCTMyScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF739D9239E016E00EA468A /* RCTMyScrollView.m */; };
 		0EF739DD239E016E00EA468A /* RCTMyScrollViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF739DB239E016E00EA468A /* RCTMyScrollViewManager.m */; };
+		0EF739E2239E0F2400EA468A /* RCTMyScrollContentViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF739DE239E0F2400EA468A /* RCTMyScrollContentViewManager.m */; };
+		0EF739E3239E0F2400EA468A /* RCTMyScrollContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF739E0239E0F2400EA468A /* RCTMyScrollContentView.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -51,6 +53,10 @@
 		0EF739D9239E016E00EA468A /* RCTMyScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTMyScrollView.m; sourceTree = "<group>"; };
 		0EF739DA239E016E00EA468A /* RCTMyScrollViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTMyScrollViewManager.h; sourceTree = "<group>"; };
 		0EF739DB239E016E00EA468A /* RCTMyScrollViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTMyScrollViewManager.m; sourceTree = "<group>"; };
+		0EF739DE239E0F2400EA468A /* RCTMyScrollContentViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTMyScrollContentViewManager.m; sourceTree = "<group>"; };
+		0EF739DF239E0F2400EA468A /* RCTMyScrollContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTMyScrollContentView.h; sourceTree = "<group>"; };
+		0EF739E0239E0F2400EA468A /* RCTMyScrollContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTMyScrollContentView.m; sourceTree = "<group>"; };
+		0EF739E1239E0F2400EA468A /* RCTMyScrollContentViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTMyScrollContentViewManager.h; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* testScrollView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testScrollView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = testScrollView/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = testScrollView/AppDelegate.m; sourceTree = "<group>"; };
@@ -162,6 +168,10 @@
 				0EF739D9239E016E00EA468A /* RCTMyScrollView.m */,
 				0EF739DA239E016E00EA468A /* RCTMyScrollViewManager.h */,
 				0EF739DB239E016E00EA468A /* RCTMyScrollViewManager.m */,
+				0EF739DF239E0F2400EA468A /* RCTMyScrollContentView.h */,
+				0EF739E0239E0F2400EA468A /* RCTMyScrollContentView.m */,
+				0EF739E1239E0F2400EA468A /* RCTMyScrollContentViewManager.h */,
+				0EF739DE239E0F2400EA468A /* RCTMyScrollContentViewManager.m */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -539,9 +549,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EF739DC239E016E00EA468A /* RCTMyScrollView.m in Sources */,
+				0EF739E2239E0F2400EA468A /* RCTMyScrollContentViewManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				0EF739DD239E016E00EA468A /* RCTMyScrollViewManager.m in Sources */,
+				0EF739E3239E0F2400EA468A /* RCTMyScrollContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

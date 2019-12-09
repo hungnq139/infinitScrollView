@@ -1,11 +1,12 @@
+#import "RCTMyScrollView.h"
+
+
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-#import "RCTMyScrollView.h"
 
 #import <UIKit/UIKit.h>
 
@@ -151,7 +152,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
  * default UIKit behaviors such as textFields automatically scrolling
  * scroll views that contain them.
  */
-@interface RCTCustomScrollView : UIScrollView<UIGestureRecognizerDelegate>
+@interface RCTMyCustomScrollView : UIScrollView<UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign) BOOL centerContent;
 #if !TARGET_OS_TV
@@ -162,7 +163,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 @end
 
 
-@implementation RCTCustomScrollView
+@implementation RCTMyCustomScrollView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -388,7 +389,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
   RCTEventDispatcher *_eventDispatcher;
   CGRect _prevFirstVisibleFrame;
   __weak UIView *_firstVisibleView;
-  RCTCustomScrollView *_scrollView;
+  RCTMyCustomScrollView *_scrollView;
   UIView *_contentView;
   NSTimeInterval _lastScrollDispatchTime;
   NSMutableArray<NSValue *> *_cachedChildFrames;
@@ -406,7 +407,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
   if ((self = [super initWithFrame:CGRectZero])) {
     _eventDispatcher = eventDispatcher;
 
-    _scrollView = [[RCTCustomScrollView alloc] initWithFrame:CGRectZero];
+    _scrollView = [[RCTMyCustomScrollView alloc] initWithFrame:CGRectZero];
     _scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _scrollView.delegate = self;
     _scrollView.delaysContentTouches = NO;
@@ -632,19 +633,27 @@ static inline void RCTApplyTransformationAccordingLayoutDirection(UIView *view, 
  */
 - (void)scrollToEnd:(BOOL)animated
 {
+  // NSLog(@"dech");
   BOOL isHorizontal = [self isHorizontal:_scrollView];
   CGPoint offset;
+  CGFloat offsetX,offsetY;
+  
   if (isHorizontal) {
-    CGFloat offsetX = _scrollView.contentSize.width - _scrollView.bounds.size.width + _scrollView.contentInset.right;
-    offset = CGPointMake(fmax(offsetX, 0), 0);
+    offsetX = _scrollView.contentSize.width - _scrollView.bounds.size.width + _scrollView.contentInset.right;
+    offsetY = 0;
   } else {
-    CGFloat offsetY = _scrollView.contentSize.height - _scrollView.bounds.size.height + _scrollView.contentInset.bottom;
-    offset = CGPointMake(0, fmax(offsetY, 0));
+    offsetX = 0;
+    offsetY = _scrollView.contentSize.height - _scrollView.bounds.size.height + _scrollView.contentInset.bottom;
   }
+  
+  offset = CGPointMake(fmax(offsetX, 0), fmax(offsetY, 0));
+  
   if (!CGPointEqualToPoint(_scrollView.contentOffset, offset)) {
     // Ensure at least one scroll event will fire
     _allowNextScrollNoMatterWhat = YES;
-    [_scrollView setContentOffset:offset animated:animated];
+    [UIView animateWithDuration:10.0 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+      [_scrollView setContentOffset:offset animated:false];
+    } completion:^(BOOL finished) {}];
   }
 }
 

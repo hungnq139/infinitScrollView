@@ -21,28 +21,28 @@
 @implementation RCTConvert (UIScrollView)
 
 RCT_ENUM_CONVERTER(UIScrollViewKeyboardDismissMode, (@{
-  @"none": @(UIScrollViewKeyboardDismissModeNone),
-  @"on-drag": @(UIScrollViewKeyboardDismissModeOnDrag),
-  @"interactive": @(UIScrollViewKeyboardDismissModeInteractive),
-  // Backwards compatibility
-  @"onDrag": @(UIScrollViewKeyboardDismissModeOnDrag),
-}), UIScrollViewKeyboardDismissModeNone, integerValue)
+                                                       @"none": @(UIScrollViewKeyboardDismissModeNone),
+                                                       @"on-drag": @(UIScrollViewKeyboardDismissModeOnDrag),
+                                                       @"interactive": @(UIScrollViewKeyboardDismissModeInteractive),
+                                                       // Backwards compatibility
+                                                       @"onDrag": @(UIScrollViewKeyboardDismissModeOnDrag),
+                                                       }), UIScrollViewKeyboardDismissModeNone, integerValue)
 
 RCT_ENUM_CONVERTER(UIScrollViewIndicatorStyle, (@{
-  @"default": @(UIScrollViewIndicatorStyleDefault),
-  @"black": @(UIScrollViewIndicatorStyleBlack),
-  @"white": @(UIScrollViewIndicatorStyleWhite),
-}), UIScrollViewIndicatorStyleDefault, integerValue)
+                                                  @"default": @(UIScrollViewIndicatorStyleDefault),
+                                                  @"black": @(UIScrollViewIndicatorStyleBlack),
+                                                  @"white": @(UIScrollViewIndicatorStyleWhite),
+                                                  }), UIScrollViewIndicatorStyleDefault, integerValue)
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunguarded-availability-new"
 #if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 110000 /* __IPHONE_11_0 */
 RCT_ENUM_CONVERTER(UIScrollViewContentInsetAdjustmentBehavior, (@{
-  @"automatic": @(UIScrollViewContentInsetAdjustmentAutomatic),
-  @"scrollableAxes": @(UIScrollViewContentInsetAdjustmentScrollableAxes),
-  @"never": @(UIScrollViewContentInsetAdjustmentNever),
-  @"always": @(UIScrollViewContentInsetAdjustmentAlways),
-}), UIScrollViewContentInsetAdjustmentNever, integerValue)
+                                                                  @"automatic": @(UIScrollViewContentInsetAdjustmentAutomatic),
+                                                                  @"scrollableAxes": @(UIScrollViewContentInsetAdjustmentScrollableAxes),
+                                                                  @"never": @(UIScrollViewContentInsetAdjustmentNever),
+                                                                  @"always": @(UIScrollViewContentInsetAdjustmentAlways),
+                                                                  }), UIScrollViewContentInsetAdjustmentNever, integerValue)
 #endif
 #pragma clang diagnostic pop
 
@@ -117,19 +117,19 @@ RCT_EXPORT_METHOD(getContentSize:(nonnull NSNumber *)reactTag
 {
   [self.bridge.uiManager addUIBlock:
    ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTMyScrollView *> *viewRegistry) {
-
-    RCTMyScrollView *view = viewRegistry[reactTag];
-    if (!view || ![view isKindOfClass:[RCTMyScrollView class]]) {
-      RCTLogError(@"Cannot find RCTMyScrollView with tag #%@", reactTag);
-      return;
-    }
-
-    CGSize size = view.scrollView.contentSize;
-    callback(@[@{
-      @"width" : @(size.width),
-      @"height" : @(size.height)
-    }]);
-  }];
+     
+     RCTMyScrollView *view = viewRegistry[reactTag];
+     if (!view || ![view isKindOfClass:[RCTMyScrollView class]]) {
+       RCTLogError(@"Cannot find RCTMyScrollView with tag #%@", reactTag);
+       return;
+     }
+     
+     CGSize size = view.scrollView.contentSize;
+     callback(@[@{
+                  @"width" : @(size.width),
+                  @"height" : @(size.height)
+                  }]);
+   }];
 }
 
 RCT_EXPORT_METHOD(calculateChildFrames:(nonnull NSNumber *)reactTag
@@ -137,18 +137,18 @@ RCT_EXPORT_METHOD(calculateChildFrames:(nonnull NSNumber *)reactTag
 {
   [self.bridge.uiManager addUIBlock:
    ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTMyScrollView *> *viewRegistry) {
-
-    RCTMyScrollView *view = viewRegistry[reactTag];
-    if (!view || ![view isKindOfClass:[RCTMyScrollView class]]) {
-      RCTLogError(@"Cannot find RCTMyScrollView with tag #%@", reactTag);
-      return;
-    }
-
-    NSArray<NSDictionary *> *childFrames = [view calculateChildFramesData];
-    if (childFrames) {
-      callback(@[childFrames]);
-    }
-  }];
+     
+     RCTMyScrollView *view = viewRegistry[reactTag];
+     if (!view || ![view isKindOfClass:[RCTMyScrollView class]]) {
+       RCTLogError(@"Cannot find RCTMyScrollView with tag #%@", reactTag);
+       return;
+     }
+     
+     NSArray<NSDictionary *> *childFrames = [view calculateChildFramesData];
+     if (childFrames) {
+       callback(@[childFrames]);
+     }
+   }];
 }
 
 RCT_EXPORT_METHOD(scrollTo:(nonnull NSNumber *)reactTag
@@ -158,14 +158,14 @@ RCT_EXPORT_METHOD(scrollTo:(nonnull NSNumber *)reactTag
 {
   [self.bridge.uiManager addUIBlock:
    ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry){
-    UIView *view = viewRegistry[reactTag];
-    if ([view conformsToProtocol:@protocol(RCTScrollableProtocol)]) {
-      [(id<RCTScrollableProtocol>)view scrollToOffset:(CGPoint){x, y} animated:animated];
-    } else {
-      RCTLogError(@"tried to scrollTo: on non-RCTScrollableProtocol view %@ "
-                  "with tag #%@", view, reactTag);
-    }
-  }];
+     UIView *view = viewRegistry[reactTag];
+     if ([view conformsToProtocol:@protocol(RCTScrollableProtocol)]) {
+       [(id<RCTScrollableProtocol>)view scrollToOffset:(CGPoint){x, y} animated:animated];
+     } else {
+       RCTLogError(@"tried to scrollTo: on non-RCTScrollableProtocol view %@ "
+                   "with tag #%@", view, reactTag);
+     }
+   }];
 }
 
 RCT_EXPORT_METHOD(scrollToEnd:(nonnull NSNumber *)reactTag
@@ -189,27 +189,27 @@ RCT_EXPORT_METHOD(zoomToRect:(nonnull NSNumber *)reactTag
 {
   [self.bridge.uiManager addUIBlock:
    ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry){
-    UIView *view = viewRegistry[reactTag];
-    if ([view conformsToProtocol:@protocol(RCTScrollableProtocol)]) {
-      [(id<RCTScrollableProtocol>)view zoomToRect:rect animated:animated];
-    } else {
-      RCTLogError(@"tried to zoomToRect: on non-RCTScrollableProtocol view %@ "
-                  "with tag #%@", view, reactTag);
-    }
-  }];
+     UIView *view = viewRegistry[reactTag];
+     if ([view conformsToProtocol:@protocol(RCTScrollableProtocol)]) {
+       [(id<RCTScrollableProtocol>)view zoomToRect:rect animated:animated];
+     } else {
+       RCTLogError(@"tried to zoomToRect: on non-RCTScrollableProtocol view %@ "
+                   "with tag #%@", view, reactTag);
+     }
+   }];
 }
 
 RCT_EXPORT_METHOD(flashScrollIndicators:(nonnull NSNumber *)reactTag)
 {
   [self.bridge.uiManager addUIBlock:
    ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTMyScrollView *> *viewRegistry){
-
+     
      RCTMyScrollView *view = viewRegistry[reactTag];
      if (!view || ![view isKindOfClass:[RCTMyScrollView class]]) {
        RCTLogError(@"Cannot find RCTMyScrollView with tag #%@", reactTag);
        return;
      }
-
+     
      [view.scrollView flashScrollIndicators];
    }];
 }
