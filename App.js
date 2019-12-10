@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import _ from 'lodash';
 
 import ScrollView from './MyScrollView';
@@ -13,28 +13,27 @@ export default class App extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this._list && this._list.autoScroll({duration: 1});
+      this._list && this._list.autoScroll({duration: 200});
     }, 3000);
-    setTimeout(() => {
-      this._list && this._list.disableAutoScroll();
-    }, 5000);
   }
 
   renderItem = ({item}) => {
     return (
-      <View
-        key={item}
-        style={{
-          height: 50,
-          width: 70,
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderTopWidth: 1,
-          borderBottomWidth: 1,
-          borderLeftWidth: 1,
-        }}>
-        <Text>{item}</Text>
-      </View>
+      <TouchableOpacity>
+        <View
+          key={item}
+          style={{
+            height: 50,
+            width: 70,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderTopWidth: 1,
+            borderBottomWidth: 1,
+            borderLeftWidth: 1,
+          }}>
+          <Text>{item}</Text>
+        </View>
+      </TouchableOpacity>
     );
   };
   setRef = sef => (this._list = sef);

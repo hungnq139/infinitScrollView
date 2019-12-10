@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-  View,
   ScrollView,
   UIManager,
   Platform,
@@ -86,31 +85,25 @@ function createScrollResponder(
 }
 
 let AndroidScrollView;
-let AndroidHorizontalScrollContentView;
 let AndroidHorizontalScrollView;
 let RCTScrollView;
 let RCTScrollContentView;
 
+if (Platform.OS === 'android') {
+  AndroidScrollView = requireNativeComponent('RCTMyScrollView');
+  AndroidHorizontalScrollView = requireNativeComponent(
+    'MyAndroidHorizontalScrollView',
+  );
+} else if (Platform.OS === 'ios') {
+  RCTScrollView = requireNativeComponent('RCTMyScrollView');
+  RCTScrollContentView = requireNativeComponent('RCTMyScrollContentView');
+} else {
+  RCTScrollView = requireNativeComponent('RCTMyScrollView');
+  RCTScrollContentView = requireNativeComponent('RCTMyScrollContentView');
+}
+
 export default class MyScrollView extends ScrollView {
   _scrollResponder: typeof ScrollResponder.Mixin = createScrollResponder(this);
-  constructor(props) {
-    super(props);
-    if (Platform.OS === 'android') {
-      AndroidScrollView = requireNativeComponent('RCTScrollView');
-      AndroidHorizontalScrollView = requireNativeComponent(
-        'AndroidHorizontalScrollView',
-      );
-      AndroidHorizontalScrollContentView = requireNativeComponent(
-        'AndroidHorizontalScrollContentView',
-      );
-    } else if (Platform.OS === 'ios') {
-      RCTScrollView = requireNativeComponent('RCTMyScrollView');
-      RCTScrollContentView = requireNativeComponent('RCTMyScrollContentView');
-    } else {
-      RCTScrollView = requireNativeComponent('RCTMyScrollView');
-      RCTScrollContentView = requireNativeComponent('RCTMyScrollContentView');
-    }
-  }
 
   autoScroll(options?: {duration?: number, delay?: number}) {
     // Default to true
@@ -131,10 +124,8 @@ export default class MyScrollView extends ScrollView {
     if (Platform.OS === 'android') {
       if (this.props.horizontal === true) {
         ScrollViewClass = AndroidHorizontalScrollView;
-        ScrollContentContainerViewClass = AndroidHorizontalScrollContentView;
       } else {
         ScrollViewClass = AndroidScrollView;
-        ScrollContentContainerViewClass = View;
       }
     } else {
       ScrollViewClass = RCTScrollView;
@@ -142,11 +133,11 @@ export default class MyScrollView extends ScrollView {
     }
     const props = super.render().props;
     const curChildren = React.Children.toArray(props.children);
-    delete props.children;
 
     const refreshControl = this.props.refreshControl;
     if (refreshControl) {
       if (Platform.OS === 'ios') {
+        delete props.children;
         const children = [
           curChildren[0],
           React.createElement(ScrollContentContainerViewClass, {
@@ -161,40 +152,20 @@ export default class MyScrollView extends ScrollView {
         );
       } else if (Platform.OS === 'android') {
         const childProp = curChildren[0].props;
-        const nestedChildren = React.Children.toArray(childProp.children);
-        delete childProp.children;
-
-        const newNestedChildren = [];
-        newNestedChildren.push(
-          React.createElement(ScrollContentContainerViewClass, {
-            ...nestedChildren[0].props,
-            ref: this._setInnerViewRef,
-          }),
-        );
 
         const children = [
-          React.createElement(
-            ScrollViewClass,
-            {...childProp, ref: this._setScrollViewRef},
-            newNestedChildren,
-          ),
+          React.createElement(ScrollViewClass, {
+            ...childProp,
+            ref: this._setScrollViewRef,
+          }),
         ];
         return React.cloneElement(refreshControl, props, children);
       }
     }
 
-    const newchildren = [];
-    newchildren.push(
-      React.createElement(ScrollContentContainerViewClass, {
-        ...curChildren[0].props,
-        ref: this._setInnerViewRef,
-      }),
-    );
-
-    return React.createElement(
-      ScrollViewClass,
-      {...props, ref: this._setScrollViewRef},
-      newchildren,
-    );
+    return React.createElement(ScrollViewClass, {
+      ...props,
+      ref: this._setScrollViewRef,
+    });
   }
 }
