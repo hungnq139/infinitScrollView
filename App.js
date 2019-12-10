@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {View, FlatList, Text, ScrollView} from 'react-native';
+import {View, Text} from 'react-native';
 import _ from 'lodash';
+
+import ScrollView from './MyScrollView';
 // CustomScrollView
 // const ScrollView = requireNativeComponent('RNCustomScrollView');
 
@@ -11,12 +13,11 @@ export default class App extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this._list && this._list.scrollToEnd({animated: false});
+      this._list && this._list.autoScroll({duration: 1});
     }, 3000);
-
-    // setTimeout(() => {
-    //   this._list && this._list.scrollTo({x: 0, y: 0});
-    // }, 5000);
+    setTimeout(() => {
+      this._list && this._list.disableAutoScroll();
+    }, 5000);
   }
 
   renderItem = ({item}) => {

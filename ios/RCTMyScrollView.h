@@ -9,12 +9,12 @@
 
 #import <React/RCTAutoInsetsProtocol.h>
 #import <React/RCTEventDispatcher.h>
-#import <React/RCTScrollableProtocol.h>
+#import "RCTMyScrollableProtocol.h"
 #import <React/RCTView.h>
 
 @protocol UIScrollViewDelegate;
 
-@interface RCTMyScrollView : RCTView <UIScrollViewDelegate, RCTScrollableProtocol, RCTAutoInsetsProtocol>
+@interface RCTMyScrollView : RCTView <UIScrollViewDelegate, RCTMyScrollableProtocol, RCTAutoInsetsProtocol>
 
 - (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher NS_DESIGNATED_INITIALIZER;
 

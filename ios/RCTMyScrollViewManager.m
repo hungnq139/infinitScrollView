@@ -159,10 +159,10 @@ RCT_EXPORT_METHOD(scrollTo:(nonnull NSNumber *)reactTag
   [self.bridge.uiManager addUIBlock:
    ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry){
      UIView *view = viewRegistry[reactTag];
-     if ([view conformsToProtocol:@protocol(RCTScrollableProtocol)]) {
-       [(id<RCTScrollableProtocol>)view scrollToOffset:(CGPoint){x, y} animated:animated];
+     if ([view conformsToProtocol:@protocol(RCTMyScrollableProtocol)]) {
+       [(id<RCTMyScrollableProtocol>)view scrollToOffset:(CGPoint){x, y} animated:animated];
      } else {
-       RCTLogError(@"tried to scrollTo: on non-RCTScrollableProtocol view %@ "
+       RCTLogError(@"tried to scrollTo: on non-RCTMyScrollableProtocol view %@ "
                    "with tag #%@", view, reactTag);
      }
    }];
@@ -174,10 +174,39 @@ RCT_EXPORT_METHOD(scrollToEnd:(nonnull NSNumber *)reactTag
   [self.bridge.uiManager addUIBlock:
    ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry){
      UIView *view = viewRegistry[reactTag];
-     if ([view conformsToProtocol:@protocol(RCTScrollableProtocol)]) {
-       [(id<RCTScrollableProtocol>)view scrollToEnd:animated];
+     if ([view conformsToProtocol:@protocol(RCTMyScrollableProtocol)]) {
+       [(id<RCTMyScrollableProtocol>)view scrollToEnd:animated];
      } else {
-       RCTLogError(@"tried to scrollTo: on non-RCTScrollableProtocol view %@ "
+       RCTLogError(@"tried to scrollTo: on non-RCTMyScrollableProtocol view %@ "
+                   "with tag #%@", view, reactTag);
+     }
+   }];
+}
+
+RCT_EXPORT_METHOD(autoScroll:(nonnull NSNumber *)reactTag
+                 duration:(CGFloat)duration delay:(CGFloat)delay)
+{
+  [self.bridge.uiManager addUIBlock:
+   ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry){
+     UIView *view = viewRegistry[reactTag];
+     if ([view conformsToProtocol:@protocol(RCTMyScrollableProtocol)]) {
+       [(id<RCTMyScrollableProtocol>)view autoScroll:duration delay:delay];
+     } else {
+       RCTLogError(@"tried to autoScroll: on non-RCTMyScrollableProtocol view %@ "
+                   "with tag #%@", view, reactTag);
+     }
+   }];
+}
+
+RCT_EXPORT_METHOD(disableAutoScroll:(nonnull NSNumber *)reactTag)
+{
+  [self.bridge.uiManager addUIBlock:
+   ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry){
+     UIView *view = viewRegistry[reactTag];
+     if ([view conformsToProtocol:@protocol(RCTMyScrollableProtocol)]) {
+       [(id<RCTMyScrollableProtocol>)view disableAutoScroll];
+     } else {
+       RCTLogError(@"tried to disableAutoScroll: on non-RCTMyScrollableProtocol view %@ "
                    "with tag #%@", view, reactTag);
      }
    }];
@@ -190,10 +219,10 @@ RCT_EXPORT_METHOD(zoomToRect:(nonnull NSNumber *)reactTag
   [self.bridge.uiManager addUIBlock:
    ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry){
      UIView *view = viewRegistry[reactTag];
-     if ([view conformsToProtocol:@protocol(RCTScrollableProtocol)]) {
-       [(id<RCTScrollableProtocol>)view zoomToRect:rect animated:animated];
+     if ([view conformsToProtocol:@protocol(RCTMyScrollableProtocol)]) {
+       [(id<RCTMyScrollableProtocol>)view zoomToRect:rect animated:animated];
      } else {
-       RCTLogError(@"tried to zoomToRect: on non-RCTScrollableProtocol view %@ "
+       RCTLogError(@"tried to zoomToRect: on non-RCTMyScrollableProtocol view %@ "
                    "with tag #%@", view, reactTag);
      }
    }];

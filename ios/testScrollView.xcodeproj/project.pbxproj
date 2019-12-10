@@ -49,6 +49,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* testScrollViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testScrollViewTests.m; sourceTree = "<group>"; };
 		09353DF5FB49C47C337698A7 /* libPods-testScrollViewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testScrollViewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E8FBDE2239F742200C351D8 /* RCTMyScrollableProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTMyScrollableProtocol.h; sourceTree = "<group>"; };
 		0EF739D8239E016E00EA468A /* RCTMyScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTMyScrollView.h; sourceTree = "<group>"; };
 		0EF739D9239E016E00EA468A /* RCTMyScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTMyScrollView.m; sourceTree = "<group>"; };
 		0EF739DA239E016E00EA468A /* RCTMyScrollViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTMyScrollViewManager.h; sourceTree = "<group>"; };
@@ -172,6 +173,7 @@
 				0EF739E0239E0F2400EA468A /* RCTMyScrollContentView.m */,
 				0EF739E1239E0F2400EA468A /* RCTMyScrollContentViewManager.h */,
 				0EF739DE239E0F2400EA468A /* RCTMyScrollContentViewManager.m */,
+				0E8FBDE2239F742200C351D8 /* RCTMyScrollableProtocol.h */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
